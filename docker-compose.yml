@@ -1,0 +1,46 @@
+version: '3'
+services:
+  clinicdbserver: 
+    image: mysql:8
+    container_name: ${DB_HOST}
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_ALLOW_EMPTY_PASSWORD: 0
+    ports:
+      - "${DB_PORT}:3306"
+    networks:
+      - networkdev
+    volumes:
+      - db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+  clinic-server-fastapi:
+    image: rogerbv9017/clinic-server-fastapi:latest
+    build:
+      context: .
+      dockerfile: ./backend/Dockerfile
+    container_name: clinic-server-fastapi
+    command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+    restart: always
+    volumes:
+      - ./backend/app:/app
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    depends_on:
+      clinicdbserver:
+        condition: service_healthy
+    networks:
+      - networkdev
+networks:
+  networkdev:
+volumes:
+  db_data:
+

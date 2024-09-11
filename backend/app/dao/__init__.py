@@ -1,0 +1,2 @@
+from .entities.Specialization import Specialization
+from .SpecializationDAO import SpecializationDAO
