@@ -35,9 +35,9 @@ jobs:
     - name: Start services using Docker Compose
       run: docker-compose up -d
     - name: Wait for services to be healthy
-      run: docker-compose exec clinicdbserver /bin/bash -c "while ! mysqladmin ping -hlocalhost --silent; do sleep 1; done"
+      run: docker-compose exec clinicdbserver -T /bin/bash -c "while ! mysqladmin ping -hlocalhost --silent; do sleep 1; done"
     - name: Run tests
-      run: docker-compose exec clinic-server-fastapi pytest
+      run: docker-compose exec -T clinic-server-fastapi pytest
     - name: Tear down services
       if: always()
       run: docker-compose down
