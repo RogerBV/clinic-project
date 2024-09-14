@@ -19,10 +19,10 @@ services:
       - db_data:/var/lib/mysql
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
-      interval: 5s
-      timeout: 5s
+      interval: 10s
+      timeout: 10s
       retries: 3
-      start_period: 30s
+      start_period: 45s
   clinic-server-fastapi:
     image: rogerbv9017/clinic-server-fastapi:latest
     build:
