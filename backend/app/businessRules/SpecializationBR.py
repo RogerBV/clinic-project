@@ -8,8 +8,11 @@ class SpecializationBR():
         return specializationDAO.getSpecializations()
     
     def insertSpecialization(self, name: str):
-        specializationDAO = SpecializationDAO()
-        return specializationDAO.insertSpecialization(name)
+        if (name):
+            specializationDAO = SpecializationDAO()
+            return specializationDAO.insertSpecialization(name)
+        else:
+            return { id: 0 }
     
     def getSpecializationById(self, id):
         specializationDAO = SpecializationDAO()
