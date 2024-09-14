@@ -34,7 +34,7 @@ class SpecializationDAO():
         session = Session()
         objSpecialization = Specialization
         try:
-            objSpecialization = session.query(Specialization).filter_by(id == specializationId).first()
+            objSpecialization = session.query(Specialization).filter_by(id=specializationId).first()
         except:
             print("Error getting Specialization register")
         return objSpecialization
