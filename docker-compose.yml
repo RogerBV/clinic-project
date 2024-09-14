@@ -1,7 +1,10 @@
 version: '3'
 services:
-  clinicdbserver: 
-    image: mysql:8
+  clinicdbserver:
+    build:
+      context: .
+      dockerfile: ./database/Dockerfile
+    image: rogerbv9017/clinicdb:latest
     container_name: ${DB_HOST}
     environment:
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
