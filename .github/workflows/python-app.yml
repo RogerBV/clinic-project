@@ -33,7 +33,7 @@ jobs:
     - name: Setup Docker Compose
       run: sudo apt-get install docker-compose
     - name: Start services using Docker Compose
-      run: docker-compose up -d
+      run: docker-compose up --build
     - name: Wait for services to be healthy
       run: docker-compose exec -T clinicdbserver /bin/bash -c "while ! mysqladmin ping -hlocalhost --silent; do sleep 1; done"
     - name: Run tests
