@@ -28,3 +28,16 @@ class SpecializationDAO():
             session.close()
         return objSpecialization
     
+    def getSpecializationById(self, specializationId):
+        engine = create_engine(DATABASE_URI)
+        Session = sessionmaker(bind=engine)
+        session = Session()
+        objSpecialization = None
+        try:
+            objSpecialization = session.query(Specialization).filter_by(id == specializationId).first()
+        except:
+            print("Error getting Specialization register")
+        return objSpecialization
+            
+            
+    

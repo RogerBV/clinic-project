@@ -11,3 +11,7 @@ class SpecializationBR():
         specializationDAO = SpecializationDAO()
         return specializationDAO.insertSpecialization(name)
     
+    def getSpecializationById(self, id):
+        specializationDAO = SpecializationDAO()
+        return specializationDAO.getSpecializationById(id)
+    

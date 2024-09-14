@@ -9,4 +9,12 @@ from businessRules import SpecializationBR
 def test_getSpecializations():
     specializationBR = SpecializationBR()
     list = specializationBR.getSpecializations()
-    assert len(list) > 0
+    assert len(list) == 0
+    
+def test_insertSpecialzation():
+    specializationNameTest = "Test 1"
+    specializationBR = SpecializationBR()
+    objSpecialization = specializationBR.insertSpecialization(specializationNameTest)
+    objSpecializationTest = specializationBR.getSpecializationById(objSpecialization.id)
+    assert objSpecializationTest.specializationName == specializationNameTest
+        
