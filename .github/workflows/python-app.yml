@@ -37,10 +37,10 @@ jobs:
     - name: Wait for services to be healthy
       run: docker-compose exec clinicdbserver /bin/bash -c "while ! mysqladmin ping -hlocalhost --silent; do sleep 1; done"
     - name: Run tests
-        run: docker-compose exec clinic-server-fastapi pytest
+      run: docker-compose exec clinic-server-fastapi pytest
     - name: Tear down services
-        if: always()
-        run: docker-compose down
+      if: always()
+      run: docker-compose down
     #- name: Lint with flake8
     #  run: |
     #    # stop the build if there are Python syntax errors or undefined names
