@@ -1,4 +1,4 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 from dao import SpecializationDAO
 from businessRules import SpecializationBR
 
@@ -15,5 +15,8 @@ async def getSpecializations():
 
 @doctorRouter.put("/insertSpecialization")
 async def insertSpecialization(name: str):
-    specializationDAO = SpecializationDAO()
-    return specializationDAO.insertSpecialization(name)
+    if name or len(name.strip()) > 0:
+        specializationBR = SpecializationBR()
+        return specializationBR.insertSpecialization(name)
+    else:
+        raise HTTPException(status_code=404, detail = "Name can not be empty")

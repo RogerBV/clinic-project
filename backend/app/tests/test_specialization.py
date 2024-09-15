@@ -17,9 +17,3 @@ def test_insertSpecialzation():
     objSpecialization = specializationBR.insertSpecialization(specializationNameTest)
     objSpecializationTest = specializationBR.getSpecializationById(objSpecialization.id)
     assert objSpecializationTest.specializationName.__eq__(specializationNameTest)
-        
-def test_insertSpecializationNameEmpty():
-    specializationNameTest = ""
-    specializationBR = SpecializationBR()
-    objSpecialization = specializationBR.insertSpecialization(specializationNameTest)
-    assert objSpecialization.id == 0 
